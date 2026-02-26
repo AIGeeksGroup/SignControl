@@ -1,5 +1,14 @@
 # SignControl: Multi-Granular Control for Sign Language Video Generation
 
+This is the official repository for the paper:
+> **SignControl: Multi-Granular Control for Sign Language Video Generation**
+>
+> [Xuehan Hou]()\*, [Zeyu Zhang](https://steve-zeyu-zhang.github.io/)\*<sup>†</sup>, [Ziye Song]()\*, [Huacan Wang](), and [Zheng Zhu](zhengzhu@ieee.org)<sup>#</sup>
+>
+> \*Equal contribution. <sup>†</sup>Project lead. <sup>#</sup>Corresponding author.
+>
+> ### [Paper]() 
+
 SignControl extends the Wan 2.1 T2V 1.3B family with a hierarchical ControlNeXt-based conditioning pipeline that is tailored to the fine-grained needs of sign language video generation. Built on the WanControl implementation, this repository reproduces the three-stage training and inference workflow described in the [SignControl paper](SignControl_paper.pdf): LoRA domain calibration, multi-modal ControlNeXt integration, and Control Decay for robustness under incomplete control.
 
 ## Repository Layout
