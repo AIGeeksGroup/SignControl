@@ -10,7 +10,11 @@ This is the official repository for the paper:
 > ### [Paper](https://github.com/AIGeeksGroup/SignControl/blob/main/SignControl_paper.pdf)
 
 
-https://github.com/user-attachments/assets/c0278ca7-7544-4361-8056-ca0604eb60ea
+
+
+https://github.com/user-attachments/assets/45b2a933-c465-44b1-9c5a-222cdb0bb233
+
+
 
 
 ## Introduction and Visualization
