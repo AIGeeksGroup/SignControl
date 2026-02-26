@@ -7,7 +7,13 @@ This is the official repository for the paper:
 >
 > \*Equal contribution. <sup>†</sup>Project lead. <sup>#</sup>Corresponding author.
 >
-> ### [Paper]() 
+> ### [Paper](https://github.com/AIGeeksGroup/SignControl/blob/main/SignControl_paper.pdf)
+
+
+https://github.com/user-attachments/assets/c0278ca7-7544-4361-8056-ca0604eb60ea
+
+
+## Introduction and Visualization
 
 SignControl extends the Wan 2.1 T2V 1.3B family with a hierarchical ControlNeXt-based conditioning pipeline that is tailored to the fine-grained needs of sign language video generation. Built on the WanControl implementation, this repository reproduces the three-stage training and inference workflow described in the [SignControl paper](SignControl_paper.pdf): LoRA domain calibration, multi-modal ControlNeXt integration, and Control Decay for robustness under incomplete control.
 
