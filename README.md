@@ -7,28 +7,26 @@ This is the official repository for the paper:
 >
 > \*Equal contribution. <sup>†</sup>Project lead. <sup>#</sup>Corresponding author.
 >
-> ### [Paper](https://github.com/AIGeeksGroup/SignControl/blob/main/SignControl_paper.pdf)
-
-
-
-
-https://github.com/user-attachments/assets/45b2a933-c465-44b1-9c5a-222cdb0bb233
-
-
-
+> ### [Paper](SignControl_paper.pdf)
 
 ## Introduction and Visualization
 
-SignControl extends the Wan 2.1 T2V 1.3B family with a hierarchical ControlNeXt-based conditioning pipeline that is tailored to the fine-grained needs of sign language video generation. Built on the WanControl implementation, this repository reproduces the three-stage training and inference workflow described in the [SignControl paper](SignControl_paper.pdf): LoRA domain calibration, multi-modal ControlNeXt integration, and Control Decay for robustness under incomplete control.
+SignControl extends the Wan 2.1 T2V 1.3B family with a hierarchical ControlNeXt-based conditioning pipeline that is tailored to the fine-grained needs of sign language video generation. Built on the DiffSynth implementation, this repository reproduces the three-stage training and inference workflow described in the [SignControl paper](SignControl_paper.pdf): LoRA domain calibration, multi-modal ControlNeXt integration, and Control Decay for robustness under incomplete control.
 
 ## Repository Layout
 
 - `SignControl_paper.pdf` – Source paper describing the architecture, experiments, and evaluation on Phoenix-2014.v3.
 - `environment.yml` – Conda recipe for `signcontrol-env` (Python 3.9, PyTorch 2.5.1 + CUDA 12.1, DiffSynth, Transformers, etc.).
-- `WanControl/` – Local copy of the WanControl project; contains the ControlNeXt extensions, training scripts, and sampling pipelines that SignControl builds upon.
-  - `examples/wanvideo/train_wan_t2v.py` – Multi-purpose training script used for LoRA alignment and ControlNeXt tuning.
-  - `examples/wanvideo/wan_1.3b_text_to_video.py` – Sample inference pipeline.
-  - `requirements.txt` / `setup.py` – Additional Python dependencies for WanControl itself.
+- `SignControl/` – Main project directory containing the DiffSynth-based implementation with ControlNeXt extensions.
+  - `diffsynth/` – Core DiffSynth library with model implementations, pipelines, and utilities.
+    - `models/` – Model implementations including Wan Video DiT, VAE, text encoders, and ControlNet modules.
+    - `pipelines/` – Inference pipelines including `wan_video.py` for sign language video generation.
+  - `examples/` – Training and inference scripts.
+    - `wanvideo/train_wan_t2v.py` – Multi-purpose training script for LoRA alignment and ControlNeXt tuning.
+    - `wanvideo/` – Wan Video specific examples and inference scripts.
+  - `Wan2.1-T2V-1.3B/` – Model configuration and assets for the 1.3B parameter model.
+  - `Wan2.1-T2V-14B/` – Model configuration for the 14B parameter model.
+  - `requirements.txt` / `setup.py` – Python dependencies for the SignControl implementation.
 
 ## Highlights from the Paper
 
@@ -42,27 +40,31 @@ SignControl extends the Wan 2.1 T2V 1.3B family with a hierarchical ControlNeXt-
 1. **Prerequisites**
    - CUDA 12.x driver + compatible GPU (4× H20 or equivalent recommended for training).
    - Conda / Miniconda installed.
+
 2. **Create the environment**
    ```bash
    conda env create -f environment.yml
    conda activate signcontrol-env
    ```
    The environment pins Python 3.9.23, PyTorch 2.5.1+cu121, transformers 4.56.1, diffsynth 1.1.2, and NVIDIA CUDA libraries (cuBLAS, cuDNN, cuSPARSE, etc.).
-3. **Install WanControl dependencies**
+
+3. **Install SignControl dependencies**
    ```bash
-   cd WanControl
+   cd SignControl
    pip install -e .
    ```
-   This ensures the ControlNet extensions, DiffSynth integrations, and WanVideo training scripts are discoverable.
+   This ensures the DiffSynth integrations, ControlNeXt extensions, and WanVideo training scripts are discoverable.
 
 ## Data Preparation
 
 1. **Phoenix-2014.v3 dataset** – use the standard download (weather-forecast sentences + German annotations). Each video is resized to 480×832 and trimmed to 81 frames, then projected into a latent space ([21, 16, 60, 104]) via the Wan2.1 VAE.
+
 2. **Control Modalities**
    - **Pose** via DWPose (body + face + hand keypoints).
    - **Optical Flow** via OnlyFlow with PGMM to capture pixel velocities.
    - **Depth** via Depth Anything V2 plus Depth LoRA for coarse spatial layout.
-3. **Directory layout** (mirrors `WanControl/examples/wanvideo/README.md`):
+
+3. **Directory layout**:
    ```text
    data/phoenix2014/
    ├── metadata.csv  # file_name,text,control_name
@@ -72,10 +74,11 @@ SignControl extends the Wan 2.1 T2V 1.3B family with a hierarchical ControlNeXt-
        └── phoenix_00001.mp4.tensors.pth
    ```
    Each row in `metadata.csv` should specify the text prompt and the matching control filename (the script will look for all modalities under that control prefix).
+
 4. **Preprocessing**
    Run the data process step to convert videos into `.tensors.pth` and align with LoRA:
    ```bash
-   CUDA_VISIBLE_DEVICES=0 python WanControl/examples/wanvideo/train_wan_t2v.py \
+   CUDA_VISIBLE_DEVICES=0 python SignControl/examples/wanvideo/train_wan_t2v.py \
      --task data_process \
      --dataset_path data/phoenix2014 \
      --output_path ./preprocessed \
@@ -96,9 +99,9 @@ SignControl follows the three-stage strategy outlined in the paper.
 2. **Stage 2 – Multi-Modal Control Learning**
    - Load the converged LoRA weights, enable ControlNeXt for each modality, and inject pose/flow/depth features into blocks 1/6/11 with learnable scaling factors.
    - Use CrossNorm to align the modality activation statistics with DiT latents before summing into the transformer blocks.
-   - Run the standard WanControl training command to jointly optimize LoRA + ControlNeXt:
+   - Run the training command to jointly optimize LoRA + ControlNeXt:
      ```bash
-     python WanControl/examples/wanvideo/train_wan_t2v.py \
+     python SignControl/examples/wanvideo/train_wan_t2v.py \
        --task train \
        --train_architecture full \
        --dataset_path data/phoenix2014 \
@@ -112,7 +115,7 @@ SignControl follows the three-stage strategy outlined in the paper.
        --dataloader_num_workers 8 \
        --control_layers 15
      ```
-   - The `--control_layers` flag determines how many transformer blocks receive ControlNeXt features; the default (15) keeps most weights frozen, lowering memory (~26 GB on a single GPU).
+   - The `--control_layers` flag determines how many transformer blocks receive ControlNeXt features; the default (15) keeps most weights frozen, lowering memory (~26 GB on a single GPU).
 
 3. **Stage 3 – Control Decay (Robustness Fine-tuning)**
    - Freeze ControlNeXt, continue fine-tuning LoRA while randomly dropping modalities according to a linear decay schedule (`p_m(e)=max(0.1, 1.0−α·max(0,e−e_stable))`).
@@ -121,11 +124,11 @@ SignControl follows the three-stage strategy outlined in the paper.
 
 ## Inference
 
-After training, use the WanControl sampling scripts to generate videos with hierarchical control:
+After training, use the DiffSynth pipeline to generate videos with hierarchical control:
 
 - **Text-only sampling (LoRA-guided)**
   ```bash
-  python WanControl/examples/wanvideo/wan_1.3b_text_to_video.py
+  python SignControl/examples/wanvideo/wan_1.3b_text_to_video.py
   ```
   Customize the prompt, negative prompt, and sampling parameters inside the script (or parameterize with CLI flags) to produce single-sentence weather forecasts, news reports, or signer variations.
 
@@ -134,11 +137,33 @@ After training, use the WanControl sampling scripts to generate videos with hier
   2. Provide the control tensors/frames to the pipeline (the ControlNeXt modules expect them at 81 frames and 3 channels per modality).
   3. Optionally simulate inference uncertainty by masking one or more modalities (e.g., drop depth) to trigger the Control Decay behavior learned during training.
 
-The inference pipeline uses WanControl’s `WanVideoPipeline` (DiffSynth) and can be extended to evaluate metrics such as BLEU, ROUGE-L, SSIM, LPIPS, and FVD against Phoenix-2014 ground truth, matching the paper’s evaluation table.
+The inference pipeline uses DiffSynth's `WanVideoPipeline` and can be extended to evaluate metrics such as BLEU, ROUGE-L, SSIM, LPIPS, and FVD against Phoenix-2014 ground truth, matching the paper's evaluation table.
+
+## Model Configurations
+
+- **Wan2.1-T2V-1.3B/** – Configuration files and assets for the 1.3B parameter model
+  - Recommended for development and testing with lower memory requirements
+  - Suitable for single GPU training and inference
+
+- **Wan2.1-T2V-14B/** – Configuration files for the 14B parameter model  
+  - Higher quality results as reported in the paper
+  - Requires multi-GPU setup for training and inference
 
 ## Notes
 
-- Keep the `signcontrol-env` environment available when running scripts; the training commands expect PyTorch + GPU-enabled CUDA libraries.
-- Hidden or excluded directories such as `signcontrol-env/` are omitted from git to keep the repo lightweight; recreate them via `environment.yml`.
-- The full SignControl paper lives in `SignControl_paper.pdf`. Consult section III and the appendix for dataset details, evaluation metrics, and ablation studies on multi-granular control and decay schedules.
+- Keep the `signcontrol-env` environment active when running scripts; the training commands expect PyTorch + GPU-enabled CUDA libraries.
+- The training script `SignControl/examples/wanvideo/train_wan_t2v.py` supports multiple tasks including data preprocessing, LoRA training, and full model training.
+- Model checkpoints and preprocessed data should be stored outside the repository to avoid large file commits.
+- The full SignControl paper is available in `SignControl_paper.pdf`. Consult section III and the appendix for dataset details, evaluation metrics, and ablation studies on multi-granular control and decay schedules.
 
+## Citation
+
+If you find this work useful, please cite:
+
+```bibtex
+@article{hou2024signcontrol,
+  title={SignControl: Multi-Granular Control for Sign Language Video Generation},
+  author={Hou, Xuehan and Zhang, Zeyu and Song, Ziye and Wang, Huacan and Zhu, Zheng},
+  year={2024}
+}
+```
