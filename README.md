@@ -35,40 +35,34 @@ SignControl extends the Wan 2.1 T2V 1.3B family with a hierarchical ControlNeXt-
 <table>
   <tr>
     <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/958e5541-2a19-48a4-a842-9f3be0fd862e" width="500" height="500" controls></video><br>
+      <video src="https://github.com/user-attachments/assets/958e5541-2a19-48a4-a842-9f3be0fd862e" width="500" height="500" controls></video>
     </td>
     <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/617714c8-6aac-4196-9b86-8bfd38a83683" width="500" height="500" controls></video><br>
+      <video src="https://github.com/user-attachments/assets/617714c8-6aac-4196-9b86-8bfd38a83683" width="500" height="500" controls></video>
     </td>
     <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/d8ad7d57-2623-4fc2-9f23-c36d7220f54b" width="500" height="500" controls></video><br>
+      <video src="https://github.com/user-attachments/assets/d8ad7d57-2623-4fc2-9f23-c36d7220f54b" width="500" height="500" controls></video>
     </td>
     <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/cc59d39c-072e-4317-b28a-cb51d3e8238c" width="500" height="500" controls></video><br>
-    </td>
-  </tr>
-
-  <tr>
-    <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/b3cd3139-c23b-4634-a8c3-1332fba17559" width="500" height="500" controls></video><br>
+      <video src="https://github.com/user-attachments/assets/cc59d39c-072e-4317-b28a-cb51d3e8238c" width="500" height="500" controls></video>
     </td>
     <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/51d259b7-c3c2-4b06-8c98-59f358f8677a" width="500" height="500" controls></video><br>
+      <video src="https://github.com/user-attachments/assets/b3cd3139-c23b-4634-a8c3-1332fba17559" width="500" height="500" controls></video>
     </td>
     <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/a170cc63-e2cd-492b-8dc0-849027765cd5" width="500" height="500" controls></video><br>
+      <video src="https://github.com/user-attachments/assets/51d259b7-c3c2-4b06-8c98-59f358f8677a" width="500" height="500" controls></video>
     </td>
     <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/57eaed97-86c9-4821-b80e-c01ad700c44c" width="500" height="500" controls></video><br>
-    </td>
-  </tr>
-
-  <tr>
-    <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/2d0eaa1c-2d9a-4a37-b2b0-f34df012da42" width="500" height="500" controls></video><br>
+      <video src="https://github.com/user-attachments/assets/a170cc63-e2cd-492b-8dc0-849027765cd5" width="500" height="500" controls></video>
     </td>
     <td width="500" align="center" valign="top">
-      <video src="https://github.com/user-attachments/assets/b9ffeed7-c2fc-4944-bd4a-a4135fca9ba4" width="500" height="500" controls></video><br>
+      <video src="https://github.com/user-attachments/assets/57eaed97-86c9-4821-b80e-c01ad700c44c" width="500" height="500" controls></video>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/2d0eaa1c-2d9a-4a37-b2b0-f34df012da42" width="500" height="500" controls></video>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/b9ffeed7-c2fc-4944-bd4a-a4135fca9ba4" width="500" height="500" controls></video>
     </td>
   </tr>
 </table>
