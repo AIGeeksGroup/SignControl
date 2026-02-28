@@ -8,6 +8,8 @@ This is the official repository for the paper:
 > \*Equal contribution. <sup>†</sup>Project lead. <sup>#</sup>Corresponding author.
 >
 > ### [Paper](SignControl_paper.pdf)
+>
+> https://github.com/user-attachments/assets/45b2a933-c465-44b1-9c5a-222cdb0bb233
 
 ## Introduction and Visualization
 
