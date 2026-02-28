@@ -15,6 +15,124 @@ This is the official repository for the paper:
 
 SignControl extends the Wan 2.1 T2V 1.3B family with a hierarchical ControlNeXt-based conditioning pipeline that is tailored to the fine-grained needs of sign language video generation. Built on the DiffSynth implementation, this repository reproduces the three-stage training and inference workflow described in the [SignControl paper](SignControl_paper.pdf): LoRA domain calibration, multi-modal ControlNeXt integration, and Control Decay for robustness under incomplete control.
 
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/dc8923ef-6434-4307-8d35-8880fa72b338" width="100%" alt="sample1"/>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/3e6f93be-2c6c-4bff-a1f2-7c47ccae9640" width="100%" alt="sample3"/>
+    </td>
+  </tr>
+</table>
+
+
+
+## Visualization
+
+### Depth
+
+<table>
+  <tr>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/958e5541-2a19-48a4-a842-9f3be0fd862e" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/617714c8-6aac-4196-9b86-8bfd38a83683" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/d8ad7d57-2623-4fc2-9f23-c36d7220f54b" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/cc59d39c-072e-4317-b28a-cb51d3e8238c" width="500" height="500" controls></video><br>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/b3cd3139-c23b-4634-a8c3-1332fba17559" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/51d259b7-c3c2-4b06-8c98-59f358f8677a" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/a170cc63-e2cd-492b-8dc0-849027765cd5" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/57eaed97-86c9-4821-b80e-c01ad700c44c" width="500" height="500" controls></video><br>
+    </td>
+  </tr>
+
+  <tr>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/2d0eaa1c-2d9a-4a37-b2b0-f34df012da42" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/b9ffeed7-c2fc-4944-bd4a-a4135fca9ba4" width="500" height="500" controls></video><br>
+    </td>
+  </tr>
+</table>
+
+
+### Pose
+
+<table>
+  <tr>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/af7d92ab-de89-40de-b227-6f9ce6ca093c" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/25982172-64e9-4ae2-9917-bf2a6ce12e90" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/9bbc331e-63eb-457a-b58b-ef71b45bbe32" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/6832c4d5-460a-4bc9-a8ef-79c64b2ddddc" width="500" height="500" controls></video><br>
+    </td>
+  </tr>
+</table>
+
+### without_pose_baseline
+
+
+<table>
+  <tr>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/efba1fea-d50e-4dd0-ba62-d67dc974345d" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/1091eea7-0987-4a99-90cc-32bf70dd2f1e" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/bc2c7072-72cc-415e-85ce-812947f17350" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/3a9afdc3-2f11-4563-82e4-8672c332aff6" width="500" height="500" controls></video><br>
+    </td>
+  </tr>
+</table>
+
+
+### with_pose_overlap
+
+
+<table>
+  <tr>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/f26c83d1-373a-42d0-99fe-1a60b7a1ee9a" width="500" height="500" controls></video><br>
+    </td>
+    <td width="500" align="center" valign="top">
+      <video src="https://github.com/user-attachments/assets/fa2a78db-e1ac-4a08-8127-572d709a1717" width="500" height="500" controls></video><br>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
 ## Repository Layout
 
 - `SignControl_paper.pdf` – Source paper describing the architecture, experiments, and evaluation on Phoenix-2014.v3.
@@ -158,14 +276,3 @@ The inference pipeline uses DiffSynth's `WanVideoPipeline` and can be extended t
 - Model checkpoints and preprocessed data should be stored outside the repository to avoid large file commits.
 - The full SignControl paper is available in `SignControl_paper.pdf`. Consult section III and the appendix for dataset details, evaluation metrics, and ablation studies on multi-granular control and decay schedules.
 
-## Citation
-
-If you find this work useful, please cite:
-
-```bibtex
-@article{hou2024signcontrol,
-  title={SignControl: Multi-Granular Control for Sign Language Video Generation},
-  author={Hou, Xuehan and Zhang, Zeyu and Song, Ziye and Wang, Huacan and Zhu, Zheng},
-  year={2024}
-}
-```
