@@ -3,7 +3,7 @@
 This is the official repository for the paper:
 > **SignControl: Multi-Granular Control for Sign Language Video Generation**
 >
-> [Xuehan Hou]()\*, [Zeyu Zhang](https://steve-zeyu-zhang.github.io/)\*<sup>†</sup>, [Ziye Song]()\*, and [Zheng Zhu](zhengzhu@ieee.org)<sup>#</sup> et al.
+> [Xuehan Hou]()\*, [Zeyu Zhang](https://steve-zeyu-zhang.github.io/)\*<sup>†</sup>, [Ziye Song](https://george-ziye-song.github.io/)\*, and [Zheng Zhu](zhengzhu@ieee.org)<sup>#</sup> et al.
 >
 > \*Equal contribution. <sup>†</sup>Project lead. <sup>#</sup>Corresponding author.
 >
